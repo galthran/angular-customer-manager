@@ -24,3 +24,12 @@ console.log(ys)
 let zs: Array<number> = [5,5,5, ...ys, 999];
 
 console.log(zs)
+
+let g = "text1";
+let gg = 'text2';
+let ggg = `Liczba x = ${x}`;
+
+console.log(ggg);
+console.log(`tablica xs ${xs[1]}`)
+console.log(`tablica xs ${xs[1] + 5}`)
+console.log(`tablica xs ${xs[1] + 5}, zs ${zs[0]}`)
