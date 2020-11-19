@@ -21,7 +21,7 @@ ys[0] = 0;
 
 console.log(ys)
 
-let zs: Array<number> = [5,5,5, ...ys, 999];
+let zs: Array<number> = [5,5,5, ...ys, 999]; //spread operator
 
 console.log(zs)
 
@@ -33,3 +33,17 @@ console.log(ggg);
 console.log(`tablica xs ${xs[1]}`)
 console.log(`tablica xs ${xs[1] + 5}`)
 console.log(`tablica xs ${xs[1] + 5}, zs ${zs[0]}`)
+
+function welcome1 (name:string, age?:number) :string { //optional parameter age 
+    return `Welcome ${name}`;
+}
+
+function welcome2 (name:string, age:number = 25) :string { //optional parameter with default value
+    return `Welcome ${name}`;
+}
+
+function welcome3 (...names:string[]) :string { // parameter with multiple values
+    return `Welcome ${names.join(', ')}`;
+}
+
+console.log(welcome3("Michał", "Karol"));
