@@ -4,7 +4,7 @@ interface CanTalk {
 }
 
 
-class Person implements CanTalk{
+class Person implements CanTalk {
     //protected name: string;
     //private age: number;
 
@@ -46,8 +46,4 @@ class Vendor extends Person {
     }
 }
 
-let vendor = new Vendor("Piotr", 22, "Agata");
-vendor.welcome();
-
-console.log(vendor);
-console.log(vendor.isAdult());
+module.exports = Vendor;
