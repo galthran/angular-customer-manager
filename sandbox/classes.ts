@@ -46,4 +46,4 @@ class Vendor extends Person {
     }
 }
 
-module.exports = Vendor;
+module.exports = {Vendor, Person};
