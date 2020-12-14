@@ -6,11 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 import { HighlightDirective } from './highlight.directive';
+import { CustomerBrowserComponent } from './customer-browser/customer-browser.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HighlightDirective
+    HighlightDirective,
+    CustomerBrowserComponent,
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,

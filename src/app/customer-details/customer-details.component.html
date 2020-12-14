@@ -1,0 +1,42 @@
+<div class="panel-headling">
+    <button type="button" (click)="left()">&lt;</button>
+    <h1 [style.color]="nameColor" [class.isActive]="isActive">{{ customer.name.toUpperCase() }}
+        <ng-container [ngSwitch]="customer.type">
+            <ng-container *ngSwitchCase="CustomerType.Standard">*</ng-container>
+            <ng-container *ngSwitchCase="CustomerType.Premium">**</ng-container>
+            <ng-container *ngSwitchCase="CustomerType.VIP">***</ng-container>
+            <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+        </ng-container>
+    </h1>
+    <button type="button" (click)="right()">&gt;</button>
+    <div class="row">
+        <div class="col-sm-8">
+            <p>{{ customer.description }}</p>
+            <p appHighlight>{{ customer.age }}</p>
+            <p>{{ customer.address.street }} {{ customer.address.houseNumber }} {{ customer.address.city }}</p>
+
+            <ul>
+                <li *ngFor="let category of customer.categories; let oddCategory = odd"
+                    [class.oddCategory]="oddCategory">{{ category }}</li>
+            </ul>
+
+            <button class="btn btn-primary" (click)="changeIsActive()" type="button">Przełącz podkreślenie</button>
+            <button class="btn btn-primary" (click)="changeColor()" type="button">Zmień kolor</button>
+            <br />
+            <input type="text" [(ngModel)]="customer.name" [ngModelOptions]="{updateOn: 'blur'}" />
+        </div>
+        <div class="col-sm-4">
+            <ng-container *ngIf="showPhoto; then photo else noPhoto"></ng-container>
+            <ng-template #photo>
+                <img [src]="customer.photoUrl" />
+            </ng-template>
+            <ng-template #noPhoto>
+                <p>Zdjęcie ukryte</p>
+            </ng-template>
+            <div class="checkbox">
+                <label><input type="checkbox" [(ngModel)]="showPhoto" /> Pokaż zdjęcie</label>
+            </div>
+            <p>{{ counter }}</p>
+        </div>
+    </div>
+</div>
