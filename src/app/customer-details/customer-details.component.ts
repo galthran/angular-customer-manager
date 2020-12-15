@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MessageService } from '../message.service';
 import { CustomerType, Customer } from '../model';
 
 @Component({
@@ -22,7 +23,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy, OnChanges {
 
   CustomerType = CustomerType;
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
     console.log('init');
@@ -46,6 +47,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy, OnChanges {
 
   changeColor() {
     this.nameColor = this.nameColor === "blue" ? "red" : "blue";
+    this.messageService.success('Colour has been changes successfully');
   }
 
   left() {
