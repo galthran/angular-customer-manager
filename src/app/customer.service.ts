@@ -1,67 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { CONFIG, Config, Customer, CustomerType } from './model';
+
+import { map } from "rxjs/operators";
+
 
 @Injectable()
 export class CustomerService {
 
-  private customers: Customer[] = [
-
-    {
-      name: 'Jan Kowalski',
-      photoUrl: 'assets/images/avatar_default.png',
-      age: 34,
-      description: "Very important client",
-      address: {
-        street: 'Polna',
-        houseNumber: '34A',
-        city: 'Brzesko'
-      },
-      type: CustomerType.Premium,
-      categories: [
-        "zagraniczny",
-        "mikroprzedsiębiorstwo",
-        "duży obrót"
-      ]
-    },
-    {
-      name: 'Michał Nowak',
-      photoUrl: 'assets/images/avatar_default.png',
-      age: 45,
-      description: "Client",
-      address: {
-        street: 'Leśna',
-        houseNumber: '45',
-        city: 'Bochnia'
-      },
-      type: CustomerType.Standard,
-      categories: [
-        "Polska",
-        "lokalna firma",
-        "średni obrót"
-      ]
-    },
-    {
-      name: 'Anna Kowalska',
-      photoUrl: 'assets/images/avatar_default.png',
-      age: 26,
-      description: "Client VIP",
-      address: {
-        street: 'Mickiewicza',
-        houseNumber: '67C',
-        city: 'Kraków'
-      },
-      type: CustomerType.VIP,
-      categories: [
-        "Polska",
-        "firma globalna",
-        "wielki obrót"
-      ]
-    }
-  ];
-
-  constructor(@Inject(CONFIG) private config: Config) { }
+  constructor(@Inject(CONFIG) private config: Config, private httpClient: HttpClient) { }
 
   getCustomers() {
-    return this.customers.slice(0, this.config.customerLimit);
+    return this.httpClient.get<Customer[]>(`${this.config.apiUrl}/customers`)
+    .pipe(map(data => data.slice(0, this.config.customerLimit)));
+  }
+
+  createCustomer(customer: Customer) {
+    console.log(customer);
+    return this.httpClient.post(`${this.config.apiUrl}/customers`, customer);
+  }
+
+  deleteCustomer(customer: Customer) {
+    return this.httpClient.delete(`${this.config.apiUrl}/customers/${customer.id}`);
   }
 }

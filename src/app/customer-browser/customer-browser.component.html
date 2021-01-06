@@ -5,6 +5,7 @@
             <option *ngFor="let c of customers" [ngValue]="c">{{ c.name }}</option>
         </select>
         <button class="btn btn-default" (click)="changeColor()">Zmień kolor</button>
+        <button class="btn btn-default" (click)="deleteCustomer()">Usuń klienta</button>
     </div>
 </div>
 

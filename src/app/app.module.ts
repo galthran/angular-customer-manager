@@ -11,9 +11,13 @@ import { CustomerService } from './customer.service';
 import { CONFIG, Config } from './model';
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './message.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomerAddComponent } from './customer-add/customer-add.component';
+import { ErrorHandlingInterceptor } from './error-handling.interceptor';
 
 const config: Config = {
-  customerLimit: 10
+  customerLimit: 5,
+  apiUrl: 'http://localhost:13378'
 }
 
 @NgModule({
@@ -21,18 +25,21 @@ const config: Config = {
     AppComponent,
     HighlightDirective,
     CustomerBrowserComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    CustomerAddComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     {provide: CustomerService, useClass: CustomerService},
     {provide: CONFIG, useValue: config},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlingInterceptor, multi: true},
     MessageService
   ],
   bootstrap: [AppComponent]
